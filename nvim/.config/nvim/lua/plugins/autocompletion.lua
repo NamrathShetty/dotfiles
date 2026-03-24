@@ -33,11 +33,13 @@ return { -- Autocompletion
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
+    'zbirenbaum/copilot-cmp',
     'onsails/lspkind.nvim',
   },
   config = function()
     -- See `:help cmp`
     local cmp = require 'cmp'
+    require('copilot_cmp').setup()
     local luasnip = require 'luasnip'
     luasnip.config.setup {}
 
@@ -153,6 +155,7 @@ return { -- Autocompletion
           -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
           group_index = 0,
         },
+        { name = 'copilot' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'buffer' },
@@ -163,6 +166,7 @@ return { -- Autocompletion
         format = function(entry, vim_item)
           vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
           vim_item.menu = ({
+            copilot = '[Copilot]',
             nvim_lsp = '[LSP]',
             luasnip = '[Snippet]',
             buffer = '[Buffer]',

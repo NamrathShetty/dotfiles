@@ -24,6 +24,7 @@ require 'plugins.autocompletion',
 require 'plugins.none-ls',
 require 'plugins.gitsigns',
 require 'plugins.alpha',
+require 'plugins.copilot',
 require 'plugins.indent-blankline',
 require 'plugins.misc'
 })

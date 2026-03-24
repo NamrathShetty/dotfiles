@@ -11,10 +11,32 @@ startup_mode = "Fullscreen"
 opacity = 0.8
 blur = true
 
-[font]
-# normal.family = "MesloLG Nerd Font Mono"
 
 [cursor]
 style = "Underline"
 thickness = 0.3
 vi_mode_style = "Block"
+
+[font]
+size = 12.0
+
+[font.bold]
+# normal.family = "MesloLG Nerd Font Mono"
+# family = "MesloLGS Nerd Font Mono"
+# family = "CaskaydiaCove Nerd Font"
+# style = "Bold"
+
+# [font.bold_italic]
+# family = "CaskaydiaCove Nerd Font"
+# # family = "MesloLGS Nerd Font Mono"
+# style = "Bold Italic"
+
+# [font.italic]
+# family = "CaskaydiaCove Nerd Font"
+# # family = "MesloLGS Nerd Font Mono"
+# style = "Italic"
+
+# [font.normal]
+# # family = "MesloLGS Nerd Font Mono"
+# family = "CaskaydiaCove Nerd Font"
+# style = "Regular"

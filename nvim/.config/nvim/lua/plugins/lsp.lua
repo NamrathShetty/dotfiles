@@ -281,6 +281,9 @@ return {
           },
         },
       },
+      copilot = {
+        enabled = false,
+      },
       lua_ls = {
         settings = {
           Lua = {
