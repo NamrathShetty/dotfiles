@@ -1,0 +1,20 @@
+[env]
+TERM = "xterm-256color"
+
+[window]
+padding.x = 10
+padding.y = 10
+
+decorations = "Buttonless"
+startup_mode = "Fullscreen"
+
+opacity = 0.8
+blur = true
+
+[font]
+# normal.family = "MesloLG Nerd Font Mono"
+
+[cursor]
+style = "Underline"
+thickness = 0.3
+vi_mode_style = "Block"

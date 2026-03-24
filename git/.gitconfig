@@ -1,0 +1,11 @@
+[user]
+	name = NamrathShetty
+	email = namrath.shetty205@gmail.com
+[credential "https://github.com"]
+	helper = 
+	helper = !/run/current-system/sw/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/run/current-system/sw/bin/gh auth git-credential
+[init]
+	defaultBranch = main
