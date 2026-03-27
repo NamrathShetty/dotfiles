@@ -28,3 +28,7 @@ complete -o default -F __start_kubectl k
 [[ ! ${BLE_VERSION-} ]] || ble-attach
 
 alias air='~/.air'
+
+if command -v tmux >/dev/null 2>&1 && [ -z "${TMUX-}" ]; then
+    tmux attach-session 2>/dev/null || tmux new-session -s main
+fi
