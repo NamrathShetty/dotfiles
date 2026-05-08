@@ -30,5 +30,21 @@ complete -o default -F __start_kubectl k
 alias air='~/.air'
 
 if command -v tmux >/dev/null 2>&1 && [ -z "${TMUX-}" ]; then
-    tmux attach-session 2>/dev/null || tmux new-session -s main
+    latest_session="$(command tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null | sort -nr | awk 'NR==1 {print $2}')"
+
+    if [ -n "$latest_session" ]; then
+        command tmux attach-session -t "$latest_session"
+    else
+        if [ -x "$HOME/.tmux/plugins/tmux-resurrect/scripts/restore.sh" ]; then
+            "$HOME/.tmux/plugins/tmux-resurrect/scripts/restore.sh"
+        fi
+
+        latest_session="$(command tmux list-sessions -F '#{session_last_attached} #{session_name}' 2>/dev/null | sort -nr | awk 'NR==1 {print $2}')"
+
+        if [ -n "$latest_session" ]; then
+            command tmux attach-session -t "$latest_session"
+        else
+            command tmux new-session
+        fi
+    fi
 fi
