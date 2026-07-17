@@ -26,10 +26,10 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
 
 -- Scope-style viewport movement (move screen around cursor)
 -- Scroll viewport without moving cursor
-vim.keymap.set('n', '<M-j>', '3<C-e>', opts) -- viewport down
-vim.keymap.set('n', '<M-k>', '3<C-y>', opts) -- viewport up
-vim.keymap.set('n', '<M-h>', '5zh', opts)   -- viewport left
-vim.keymap.set('n', '<M-l>', '5zl', opts)   -- viewport right
+vim.keymap.set('n', '<M-j>', '3<C-e>', { noremap = true, silent = true, desc = 'Scroll viewport down' })
+vim.keymap.set('n', '<M-k>', '3<C-y>', { noremap = true, silent = true, desc = 'Scroll viewport up' })
+vim.keymap.set('n', '<M-h>', '5zh', { noremap = true, silent = true, desc = 'Scroll viewport left' })
+vim.keymap.set('n', '<M-l>', '5zl', { noremap = true, silent = true, desc = 'Scroll viewport right' })
 
 -- Toggle scope mode: keep cursor near center of the screen
 vim.keymap.set('n', '<leader>sc', function()

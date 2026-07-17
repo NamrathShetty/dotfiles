@@ -13,6 +13,24 @@ return {
     'tpope/vim-fugitive',
   },
   {
+    -- Write Session.vim automatically so tmux-resurrect can restore Neovim state
+    'tpope/vim-obsession',
+    lazy = false,
+    init = function()
+      vim.api.nvim_create_autocmd('VimEnter', {
+        callback = function()
+          if vim.env.TMUX and vim.v.this_session == '' then
+            if vim.fn.filereadable('Session.vim') == 1 then
+              vim.cmd 'silent! source Session.vim'
+            end
+
+            vim.cmd 'silent! Obsession Session.vim'
+          end
+        end,
+      })
+    end,
+  },
+  {
     -- GitHub integration for vim-fugitive
     'tpope/vim-rhubarb',
   },

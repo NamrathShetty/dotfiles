@@ -27,6 +27,67 @@ return {
     },
   },
   config = function()
+    local uv = vim.uv or vim.loop
+    local filesystem = require('neo-tree.sources.filesystem')
+    local utils = require('neo-tree.utils')
+
+    local function first_file_in_directory(directory_path)
+      local handle = uv.fs_scandir(directory_path)
+      if not handle then
+        return nil
+      end
+
+      local entries = {}
+      while true do
+        local name, kind = uv.fs_scandir_next(handle)
+        if not name then
+          break
+        end
+        table.insert(entries, { name = name, kind = kind })
+      end
+
+      table.sort(entries, function(left, right)
+        if left.kind == right.kind then
+          return left.name < right.name
+        end
+
+        return left.kind == 'directory' and right.kind ~= 'directory'
+      end)
+
+      for _, entry in ipairs(entries) do
+        local child_path = vim.fs.joinpath(directory_path, entry.name)
+        if entry.kind == 'file' then
+          return child_path
+        end
+        if entry.kind == 'directory' then
+          local nested_file = first_file_in_directory(child_path)
+          if nested_file then
+            return nested_file
+          end
+        end
+      end
+
+      return nil
+    end
+
+    local function open_first_file_or_default(state)
+      local node = state.tree:get_node()
+      if node and node.type == 'directory' then
+        local target_path = first_file_in_directory((node:get_id()):gsub('/+$', ''))
+        if target_path then
+          filesystem.navigate(state, nil, target_path, nil, false)
+          return
+        end
+
+        if not node:is_expanded() then
+          filesystem.toggle_directory(state, node, nil, false, true)
+        end
+        return
+      end
+
+      require('neo-tree.sources.filesystem.commands').open(state)
+    end
+
     require('neo-tree').setup {
       close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
       popup_border_style = 'rounded',
@@ -132,7 +193,7 @@ return {
             nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
           },
           ['<2-LeftMouse>'] = 'open',
-          ['<cr>'] = 'open',
+          ['<cr>'] = open_first_file_or_default,
           ['<esc>'] = 'cancel', -- close preview or floating neo-tree window
           ['P'] = { 'toggle_preview', config = { use_float = true } },
           ['l'] = 'open',
