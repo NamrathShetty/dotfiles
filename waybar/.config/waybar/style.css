@@ -1,0 +1,84 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Iosevka Nerd Font", "Fira Code", monospace;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: rgba(242, 250, 255, 0.92);
+}
+
+#workspaces button {
+  margin: 5px 3px;
+  padding: 3px 10px;
+  color: rgba(242, 250, 255, 0.92);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+}
+
+#workspaces button.active {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+#clock,
+#pulseaudio,
+#network,
+#bluetooth,
+#backlight,
+#battery,
+#custom-settings,
+#custom-cheatsheet,
+#tray {
+  margin: 5px 3px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  color: rgba(248, 252, 255, 0.95);
+}
+
+#window,
+#workspaces,
+#clock,
+#pulseaudio,
+#network,
+#bluetooth,
+#backlight,
+#battery,
+#custom-settings,
+#custom-cheatsheet,
+#tray {
+  box-shadow: 0 8px 24px rgba(7, 20, 34, 0.22);
+}
+
+#battery .charging {
+  color: #4caf50;
+}
+
+#battery .discharging {
+  color: #f44336;
+}
+
+#battery .full {
+  color: #2196f3;
+}
+
+#battery .empty {
+  color: #9e9e9e;
+}
+
+#battery .warning {
+  color: #ff9800;
+}
+
+#battery .critical {
+  color: #f44336;
+}
+

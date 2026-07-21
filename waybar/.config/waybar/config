@@ -1,0 +1,50 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 38,
+  "output": ["eDP-1", "DP-1", "DP-2", "HDMI-A-1", "HDMI-A-2"],
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["network", "bluetooth", "pulseaudio", "battery", "custom/settings", "tray"],
+
+  "clock": {
+    "format": "{:%a %d %b %H:%M}",
+    "on-click": "gnome-calendar"
+  },
+
+  "network": {
+    "format-wifi": "  {signalStrength}%",
+    "format-ethernet": "󰈀  connected",
+    "format-disconnected": "󰖪  disconnected",
+    "on-click": "gnome-control-center network"
+  },
+
+  "bluetooth": {
+    "format": "  {status}",
+    "format-connected": "  {device_alias}",
+    "format-disabled": "  off",
+    "format-no-controller": "  n/a",
+    "on-click": "gnome-control-center bluetooth"
+  },
+
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": "  muted",
+    "on-click": "gnome-control-center sound"
+  },
+
+  "custom/settings": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "gnome-control-center"
+  },
+
+  "tray": {
+    "spacing": 8
+  }
+}
