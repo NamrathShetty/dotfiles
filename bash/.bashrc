@@ -23,15 +23,69 @@ bind -m vi-command '"\C-j":accept-line'
 
 eval "$(starship init bash)"
 
-if [[ $- == *i* && -z ${TMUX-} && ${TERM_PROGRAM-} != vscode ]]; then
+if [[ $- == *i* && ${TERM_PROGRAM-} != vscode ]]; then
     source -- "$(blesh-share)"/ble.sh --attach=none
 fi
 
-if [[ ${BLE_VERSION-} && -z ${TMUX-} && ${TERM_PROGRAM-} != vscode ]]; then
+if [[ ${BLE_VERSION-} && ${TERM_PROGRAM-} != vscode ]]; then
     bleopt prompt_ps1_transient=always
 fi
 
 eval "$(zoxide init bash)"
+
+__bash_history_setup() {
+    local shared_history_file="$HOME/.bash_history"
+    local history_dir="${XDG_STATE_HOME:-$HOME/.local/state}/bash-history"
+
+    mkdir -p "$history_dir"
+
+    shopt -s histappend 2>/dev/null || true
+
+    if [[ -n ${TMUX-} ]]; then
+        local window_key current_lines
+
+        window_key="$(command tmux display-message -p '#{session_name}_#{window_id}' 2>/dev/null || printf 'tmux')"
+        window_key="${window_key//[^A-Za-z0-9._-]/_}"
+
+        HISTFILE="$history_dir/${window_key}.history"
+        touch "$HISTFILE"
+
+        history -c
+        history -r "$HISTFILE" 2>/dev/null || true
+
+        current_lines="$(wc -l < "$HISTFILE" 2>/dev/null || printf '0')"
+        __bash_history_last_synced="$current_lines"
+
+        __bash_history_sync() {
+            local total_lines
+
+            history -a
+
+            total_lines="$(wc -l < "$HISTFILE" 2>/dev/null || printf '0')"
+            if (( total_lines > __bash_history_last_synced )); then
+                tail -n +$((__bash_history_last_synced + 1)) "$HISTFILE" >> "$shared_history_file"
+                __bash_history_last_synced="$total_lines"
+            fi
+        }
+    else
+        HISTFILE="$shared_history_file"
+
+        __bash_history_sync() {
+            history -a
+            history -n
+        }
+    fi
+
+    if [[ -n ${PROMPT_COMMAND-} ]]; then
+        PROMPT_COMMAND="__bash_history_sync; $PROMPT_COMMAND"
+    else
+        PROMPT_COMMAND="__bash_history_sync"
+    fi
+
+    trap '__bash_history_sync' EXIT
+}
+
+__bash_history_setup
 
 #kubernetes
 if command -v kubectl >/dev/null 2>&1; then
@@ -39,7 +93,7 @@ if command -v kubectl >/dev/null 2>&1; then
     complete -o default -F __start_kubectl k
 fi
 
-if [[ ! ${BLE_VERSION-} || -n ${TMUX-} || ${TERM_PROGRAM-} == vscode ]]; then
+if [[ ! ${BLE_VERSION-} || ${TERM_PROGRAM-} == vscode ]]; then
     :
 else
     ble-attach
