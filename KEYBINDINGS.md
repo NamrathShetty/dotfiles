@@ -70,15 +70,9 @@ Configuration source: [hypr/.config/hypr/hyprland.conf](hypr/.config/hypr/hyprla
 
 These commands run once at Hyprland startup:
 
-- `alacritty`
-- `firefox`
-- `code`
-
-Window rules then place those apps on fixed workspaces:
-
-- `Alacritty` -> workspace 1
-- `firefox` -> workspace 2
-- `code-oss` / `Code` / `code` -> workspace 3
+- `alacritty` on workspace 1
+- `firefox` on workspace 2
+- `code` on workspace 3
 
 ### Mouse
 
