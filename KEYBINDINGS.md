@@ -66,6 +66,20 @@ Configuration source: [hypr/.config/hypr/hyprland.conf](hypr/.config/hypr/hyprla
 | `Super+Ctrl+Shift+Up` | Move window to previous workspace |
 | `Super+Ctrl+Shift+Down` | Move window to next workspace |
 
+### Startup App Placement
+
+These commands run once at Hyprland startup:
+
+- `alacritty`
+- `firefox`
+- `code`
+
+Window rules then place those apps on fixed workspaces:
+
+- `Alacritty` -> workspace 1
+- `firefox` -> workspace 2
+- `code-oss` / `Code` / `code` -> workspace 3
+
 ### Mouse
 
 | Keys | Action |
