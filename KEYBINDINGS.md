@@ -38,6 +38,10 @@ Configuration source: [hypr/.config/hypr/hyprland.conf](hypr/.config/hypr/hyprla
 | `Super+D` | Open app launcher (`rofi -show drun`) |
 | `Super+Q` | Close active window |
 | `Super+Shift+E` | Exit Hyprland |
+| `Super+Shift+S` | Lock screen and suspend system (`~/.config/hypr/scripts/suspend.sh`) |
+| `Super+Shift+H` | Hibernate system (`systemctl hibernate`) |
+| `Super+Shift+R` | Reboot system (`systemctl reboot`) |
+| `Super+Shift+X` | Power off system (`systemctl poweroff`) |
 | `Super+V` | Toggle floating |
 | `Super+F` | Toggle fullscreen |
 | `Super+Shift+B` | Reload Waybar (`pkill -SIGUSR1 waybar`) |
@@ -72,7 +76,6 @@ These commands run once at Hyprland startup:
 
 - `alacritty` on workspace 1
 - `firefox` on workspace 2
-- `code` on workspace 3
 
 ### Mouse
 
@@ -85,17 +88,17 @@ These commands run once at Hyprland startup:
 
 | Key | Action |
 | --- | --- |
-| `XF86MonBrightnessUp` | Increase brightness by 5% |
-| `XF86MonBrightnessDown` | Decrease brightness by 5% |
-| `XF86AudioRaiseVolume` | Increase volume by 5% |
-| `XF86AudioLowerVolume` | Decrease volume by 5% |
-| `XF86AudioMute` | Toggle output mute |
-| `XF86AudioMicMute` | Toggle microphone mute |
-| `XF86AudioPlay` | Play / pause media |
-| `XF86AudioPause` | Pause media |
-| `XF86AudioNext` | Next track |
-| `XF86AudioPrev` | Previous track |
-| `XF86AudioStop` | Stop media |
+| `Fn+Brightness Up` | Increase brightness by 5% (OSD shown) |
+| `Fn+Brightness Down` | Decrease brightness by 5% (OSD shown) |
+| `Fn+Volume Up` | Increase volume by 5% (OSD shown) |
+| `Fn+Volume Down` | Decrease volume by 5% (OSD shown) |
+| `Fn+Mute` | Toggle output mute (OSD shown) |
+| `Fn+Mic Mute` | Toggle microphone mute (OSD shown) |
+| `Fn+Play/Pause` | Play / pause media |
+| `Fn+Pause` | Pause media |
+| `Fn+Next Track` | Next track |
+| `Fn+Prev Track` | Previous track |
+| `Fn+Stop` | Stop media |
 
 ## tmux
 
