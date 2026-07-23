@@ -23,15 +23,14 @@ bind -m vi-command '"\C-j":accept-line'
 
 eval "$(starship init bash)"
 
-if [[ $- == *i* && ${TERM_PROGRAM-} != vscode ]]; then
-    source -- "$(blesh-share)"/ble.sh --attach=none
-fi
-
-if [[ ${BLE_VERSION-} && ${TERM_PROGRAM-} != vscode ]]; then
-    bleopt prompt_ps1_transient=always
-fi
-
 eval "$(zoxide init bash)"
+
+[[ $- == *i* ]] &&
+    source -- "$(blesh-share)"/ble.sh --attach=none
+
+bleopt prompt_ps1_transient=always
+
+[[ ! ${BLE_VERSION-} ]] || ble-attach
 
 __bash_history_setup() {
     local shared_history_file="$HOME/.bash_history"
@@ -91,12 +90,6 @@ __bash_history_setup
 if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion bash)
     complete -o default -F __start_kubectl k
-fi
-
-if [[ ! ${BLE_VERSION-} || ${TERM_PROGRAM-} == vscode ]]; then
-    :
-else
-    ble-attach
 fi
 
 alias air='~/.air'
